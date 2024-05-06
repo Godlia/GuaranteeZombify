@@ -2,25 +2,17 @@
   "schemaVersion": 1,
   "id": "guaranteezombify",
   "version": "${version}",
-  "name": "GuaranteeZombify",
-  "description": "",
+  "name": "Guarantee Zombify",
+  "description": "Guaranteed zombification of villagers.",
   "authors": [
     "Godlia"
   ],
   "contact": {
-    "website": "https://github.com/eirik/GuaranteeZombify",
-    "repo": "https://github.com/eirik/GuaranteeZombify"
+    "repo": "https://github.com/eirik/VillagerZombification"
   },
   "license": "All-Rights-Reserved",
-  "icon": "assets/guaranteezombify/icon.png",
-  "environment": "server",
+  "environment": "*",
   "entrypoints": {
-    "client": [
-      "com.godlia.guaranteezombify.client.GuaranteeZombifyClient"
-    ],
-    "main": [
-      "com.godlia.guaranteezombify.GuaranteeZombify"
-    ]
   },
   "mixins": [
     "guaranteezombify.mixins.json"

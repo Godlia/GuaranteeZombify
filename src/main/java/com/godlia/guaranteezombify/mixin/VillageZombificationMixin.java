@@ -1,29 +1,23 @@
-package com.godlia.guaranteezombify.client;
+package com.godlia.guaranteezombify.mixin;
 
-import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.mob.ZombieVillagerEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.mojang.text2speech.Narrator.LOGGER;
+import java.util.logging.Logger;
 
 @Mixin(VillagerEntity.class)
-public class GuaranteeZombifyClient implements ClientModInitializer {
-    /**
-     * Runs the mod initializer on the client environment.
-     */
-    @Override
-    public void onInitializeClient() {
-
-    }
-
-    @Inject(method = "onDeath" , at = @At("HEAD"), cancellable = true)
+public class VillageZombificationMixin {
+    @Unique
+    Logger LOGGER = Logger.getLogger("GuaranteeZombify");
+    @Inject(method = "onDeath" ,at = @At("HEAD"), cancellable = true)
     public void onDeath(DamageSource source, CallbackInfo ci) {
         LOGGER.info("GODLIA Villager died");
         //spawn a zombievillager with same trades as the villagers
@@ -34,9 +28,8 @@ public class GuaranteeZombifyClient implements ClientModInitializer {
             zombieVillager.setVillagerData(villager.getVillagerData());
             zombieVillager.setXp(villager.getExperience());
             villager.getWorld().spawnEntity(zombieVillager);
-
             ci.cancel();
-
         }
     }
+
 }
