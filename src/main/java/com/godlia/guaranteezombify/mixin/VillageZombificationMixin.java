@@ -5,6 +5,8 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.mob.ZombieVillagerEntity;
 import net.minecraft.entity.passive.VillagerEntity;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtOps;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,6 +29,8 @@ public class VillageZombificationMixin {
             zombieVillager.refreshPositionAndAngles(villager.getX(), villager.getY(), villager.getZ(), villager.getYaw(), villager.getPitch());
             zombieVillager.setVillagerData(villager.getVillagerData());
             zombieVillager.setXp(villager.getExperience());
+            zombieVillager.setOfferData(villager.getOffers().toNbt());
+            zombieVillager.setGossipData(villager.getGossip().serialize(NbtOps.INSTANCE));
             villager.getWorld().spawnEntity(zombieVillager);
             ci.cancel();
         }
