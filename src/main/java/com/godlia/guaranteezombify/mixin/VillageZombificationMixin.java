@@ -23,6 +23,7 @@ public class VillageZombificationMixin {
     public void onDeath(DamageSource source, CallbackInfo ci) {
         LOGGER.info("GODLIA Villager died");
         //spawn a zombievillager with same trades as the villagers
+        /*
         if(source.getAttacker() instanceof ZombieEntity) {
             VillagerEntity villager = (VillagerEntity) (Object) this;
             ZombieVillagerEntity zombieVillager = new ZombieVillagerEntity(EntityType.ZOMBIE_VILLAGER, villager.getWorld());
@@ -32,6 +33,19 @@ public class VillageZombificationMixin {
             zombieVillager.setOfferData(villager.getOffers().toNbt());
             zombieVillager.setGossipData(villager.getGossip().serialize(NbtOps.INSTANCE));
             villager.getWorld().spawnEntity(zombieVillager);
+            ci.cancel();
+        }
+        */
+        if(source.getAttacker() instanceof ZombieEntity) {
+            VillagerEntity villagerEnt = (VillagerEntity) (Object) this; 
+            ZombieVillagerEntity zombieVillagerEnt = villagerEnt.convertTo(EntityType.ZOMBIE_VILLAGER, false);
+            assert zombieVillagerEnt != null;
+            zombieVillagerEnt.refreshPositionAndAngles(villagerEnt.getX(), villagerEnt.getY(), villagerEnt.getZ(), villagerEnt.getYaw(), villagerEnt.getPitch());
+            zombieVillagerEnt.setVillagerData(villagerEnt.getVillagerData());
+            zombieVillagerEnt.setXp(villagerEnt.getExperience());
+            zombieVillagerEnt.setOfferData(villagerEnt.getOffers().toNbt());
+            zombieVillagerEnt.setGossipData(villagerEnt.getGossip().serialize(NbtOps.INSTANCE));
+            villagerEnt.getWorld().spawnEntity(zombieVillagerEnt);
             ci.cancel();
         }
     }
