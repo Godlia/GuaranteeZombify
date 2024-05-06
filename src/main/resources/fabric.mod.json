@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "guaranteezombify",
+  "version": "${version}",
+  "name": "GuaranteeZombify",
+  "description": "",
+  "authors": [
+    "Godlia"
+  ],
+  "contact": {
+    "website": "https://github.com/eirik/GuaranteeZombify",
+    "repo": "https://github.com/eirik/GuaranteeZombify"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/guaranteezombify/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "client": [
+      "com.godlia.guaranteezombify.client.GuaranteeZombifyClient"
+    ],
+    "main": [
+      "com.godlia.guaranteezombify.GuaranteeZombify"
+    ]
+  },
+  "mixins": [
+    "guaranteezombify.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
